@@ -2,9 +2,11 @@
 
 **Overview**:
 
-- Admin Panel `http://localhost:8001`
-- Application Builder `http://localhost:8002`
-- Xquery Script Demos `http://localhost:8000/use-cases/`
+URL | Description
+--- | ---
+Admin Panel | `http://localhost:8001`
+Application Builder | `http://localhost:8002`
+Xquery Script Demos | `http://localhost:8000/use-cases/`
 
 
 
@@ -28,23 +30,17 @@ MarkLogic databases are made of Forests. A database can store XML documents, bin
 
 A MarkLogic database can be accessed by using a connection to an App Server. There are three connection types: HTTP Server, WebDAV, and XDBC (Java)
 
-^ App Server ^ Description ^
-| HTTP   | MarkLogic use an HTTP server as the main channel to serve content from a database directly to the end user. Marklogic will either serve HTML pages directly or process HTTP requests throughout a series of XQueries which will produce an HTML. This is possible since XQuery processes XML documents. |
-| XDBC   | An XDBC App Server allows XCC clients to communicate with MarkLogic Databases. Java or .NET applications use XCC as the main medium to process or request XML documents from MarkLogic. IDEs such as the Oxygen XML Editor for Eclipse also use XCC to connect to MarkLogic. MarkLogic XCC client connectors can be downloaded from [[http://developer.marklogic.com/products|MarkLogic]]. |
-| WebDAV | App Servers of this type allow reading and writing data (XML documents) into a MarkLogic database. WebDAV App Servers do not execute XQueries. Instead, they provide a straight an easy way to copy, delete, or update XML data located inside the database in an analogous way to managing files and folders in the Windows Explorer. |
+App Server | Description
+--- | ---
+HTTP   | MarkLogic use an HTTP server as the main channel to serve content from a database directly to the end user. Marklogic will either serve HTML pages directly or process HTTP requests throughout a series of XQueries which will produce an HTML. This is possible since XQuery processes XML documents.
+XDBC   | An XDBC App Server allows XCC clients to communicate with MarkLogic Databases. Java or .NET applications use XCC as the main medium to process or request XML documents from MarkLogic. IDEs such as the Oxygen XML Editor for Eclipse also use XCC to connect to MarkLogic. MarkLogic XCC client connectors can be downloaded from [[http://developer.marklogic.com/products|MarkLogic]].
+WebDAV | App Servers of this type allow reading and writing data (XML documents) into a MarkLogic database. WebDAV App Servers do not execute XQueries. Instead, they provide a straight an easy way to copy, delete, or update XML data located inside the database in an analogous way to managing files and folders in the Windows Explorer.
 
 * It is not recommended to use XQueries exclusively to mimic the behavior of programming languages such as PHP, ASP.NET or Java/JSP to serve dynamic content over the web. XQueries become easily complex and lack several features of programming languages.*
 
 ## W3C Use Case XQuery Example
 
 MarkLogic includes a suite of XQuery script examples installed by default with the following details:
-
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-
 
 Database | Documents
 --- | ---	
@@ -75,29 +71,36 @@ Name of HTTP server
 
 ## Root
 Specifies the location where the XQuery scripts to be processed by the App HTTP server are located. This should always end in "/" or "\".
-\\
-\\
-The root can be located either in the File System or inside MarkLogic's database. MarkLogic will use the //**Modules**// option to interpret the //**Root**// location.
+
+The root can be located either in the File System or inside MarkLogic's database. MarkLogic will use the ***Modules*** option to interpret the ***Root*** location.
 
 ### File System
 
 If the XQuery scripts are located outside of the root directory where MarkLogic was installed  an absolute path must be declared:
-<code>c:\My Application\My Queries\</code>
+```
+c:\My Application\My Queries\
+```
 
 When the XQuery scripts are located under the root directory of MarkLogic, a relative path can be used.
 
-<code bash>My Queries/      # This will point to c:\Program Files\MarkLogic\My Queries\</code>
+```bash
+My Queries/      # This will point to c:\Program Files\MarkLogic\My Queries\
+```
 
 
 ### Database Path
 
 When using a database pathname it is possible to use a root directory:
 
-<code bash>/       # Pointing to root of the database.</code>
+```bash
+/       # Pointing to root of the database.
+```
 
 The pathname can also be specific:
 
-<code bash>My Queries/     # Pointing to /My Queries/</code>
+```bash
+My Queries/     # Pointing to /My Queries/
+```
 
 ### Port
 
@@ -105,10 +108,9 @@ The TCP port to be used by the App Server in order to serve content(XQueries, XM
 
 ### Modules
 
-Defines whether the //**Root**// pathname will be interpreted as a location in the file system, specified by //**(file system)**//, or to a location inside the database, specified by a //**database name**//.
-\\
-\\
-Modules is only available for HTTP and XDBC connections. WebDAV connections will always use the database name specified in the //**Database**// option as the location to be used by the option //**Root**//
+Defines whether the ***Root*** pathname will be interpreted as a location in the file system, specified by ***(file system)***, or to a location inside the database, specified by a ***database name***.
+
+Modules is only available for HTTP and XDBC connections. WebDAV connections will always use the database name specified in the ***Database*** option as the location to be used by the option ***Root***
 
 ### Database
 
@@ -116,15 +118,15 @@ Name of the database that the App Server is linked to.
 
 ### URL Rewriter
 
-This option is available only in HTTP App Servers. It modifies how MarkLogic handles HTTP requests. The URL rewriter will use the XQuery script declared on this field. The location of this script follows the rules of the options //**Root**// and  //**Modules**//.
+This option is available only in HTTP App Servers. It modifies how MarkLogic handles HTTP requests. The URL rewriter will use the XQuery script declared on this field. The location of this script follows the rules of the options ***Root*** and  ***Modules***.
 
-<code bash>/myScripts/urlRewrite.xqy       # URL rewriter script</code>
+```bash
+/myScripts/urlRewrite.xqy       # URL rewriter script
+```
 
 The following is an example of an URL Rewriter Script:
 
-<code>
- 
-
+``` 
 xquery version "1.0-ml";
 
 let $url := xdmp:get-request-url()
@@ -134,21 +136,23 @@ let $url := fn:replace($url, "^/myWeb/([0-9a-zA-Z\.]+)$", "/subCode/$1")
 
 return $url
 
- 
-</code>
+```
 
 For every request made to the HTTP App server to which this URL rewriter script belongs to, MarkLogic's function //xdmp:get-request-url// will defer the request to the appropriate handler specified by //fn:replace//. This change is made inside MarkLogic and it is not displayed to the end user. Examples according to the previous script are below:
 
-^     Original Request                     ^  Internal Rewriten Request  ^
-| http://www.mydomain.com/index.html       |  /mainCode/index.html       |
-| http://www.mydomain.com/myWeb/index.html |  /subCode/index.html        |
+Original Request | Internal Rewriten Request
+--- | ---
+`http://www.mydomain.com/index.html`       |  /mainCode/index.html
+`http://www.mydomain.com/myWeb/index.html` |  /subCode/index.html
 
 # Log
 
 MarkLogic tracks the most common script and server behavior in the logs located in:
-<code>C:\Program Files\MarkLogic\Data\Logs</code>
+```
+C:\Program Files\MarkLogic\Data\Logs
+```
 
-  * HTTP related logs are named under the corresponding HTTP App Server port. Example: //8000_AccessLog.txt//
+  * HTTP related logs are named under the corresponding HTTP App Server port. Example: *8000_AccessLog.txt*
   * Most XQuery errors are logged under //ErrorLog.txt//
 
 XQuery scripts can write in the log by using //**xdmp:log()**//
