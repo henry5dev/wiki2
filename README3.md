@@ -33,7 +33,7 @@ A MarkLogic database can be accessed by using a connection to an App Server. The
 App Server | Description
 --- | ---
 HTTP   | MarkLogic use an HTTP server as the main channel to serve content from a database directly to the end user. Marklogic will either serve HTML pages directly or process HTTP requests throughout a series of XQueries which will produce an HTML. This is possible since XQuery processes XML documents.
-XDBC   | An XDBC App Server allows XCC clients to communicate with MarkLogic Databases. Java or .NET applications use XCC as the main medium to process or request XML documents from MarkLogic. IDEs such as the Oxygen XML Editor for Eclipse also use XCC to connect to MarkLogic. MarkLogic XCC client connectors can be downloaded from [[http://developer.marklogic.com/products|MarkLogic]].
+XDBC   | An XDBC App Server allows XCC clients to communicate with MarkLogic Databases. Java or .NET applications use XCC as the main medium to process or request XML documents from MarkLogic. IDEs such as the Oxygen XML Editor for Eclipse also use XCC to connect to MarkLogic. MarkLogic XCC client connectors can be downloaded from [http://developer.marklogic.com/products|MarkLogic].
 WebDAV | App Servers of this type allow reading and writing data (XML documents) into a MarkLogic database. WebDAV App Servers do not execute XQueries. Instead, they provide a straight an easy way to copy, delete, or update XML data located inside the database in an analogous way to managing files and folders in the Windows Explorer.
 
 * It is not recommended to use XQueries exclusively to mimic the behavior of programming languages such as PHP, ASP.NET or Java/JSP to serve dynamic content over the web. XQueries become easily complex and lack several features of programming languages.*
@@ -155,14 +155,16 @@ C:\Program Files\MarkLogic\Data\Logs
   * HTTP related logs are named under the corresponding HTTP App Server port. Example: *8000_AccessLog.txt*
   * Most XQuery errors are logged under //ErrorLog.txt//
 
-XQuery scripts can write in the log by using //**xdmp:log()**//
+XQuery scripts can write in the log by using ***xdmp:log()***
 
 # Task Server
 
 The task server specifies the basic environment under which //scheduled task// are performed.
 
 MarkLogic will execute scheduled task according to the configuration specified in:
-<code>Configure > Groups > Default > Task Server</code>
+```
+Configure > Groups > Default > Task Server
+```
 
 ## Threads
 Maximum number of threads that Marklogic will execute at the same time (concurrently)
@@ -173,31 +175,35 @@ A query that last more than the seconds specified on this field will be forced t
 # Scheduled Tasks
 
 Scheduled tasks can be monitored, or cancelled in:
-<code>Configure > Status > Show More(bottom)</code>
-//MarkLogic's log can be used to track further details of a running scheduled script.//
+```
+Configure > Status > Show More(bottom)
+```
+*MarkLogic's log can be used to track further details of a running scheduled script.*
 
 Scheduled tasks are set in:
-<code>Configure > Groups > Default > Scheduled Tasks</code>
-//Scheduled tasks cannot be modified. Only deletion is available.//
+```
+Configure > Groups > Default > Scheduled Tasks
+```
+*Scheduled tasks cannot be modified. Only deletion is available.*
 
 ## Task Path
 
-The location of the XQuery script to be run, which is directly related to //**Task Root**//. For example: ///task.xqy// or ///mySubPath/task.xqy//
+The location of the XQuery script to be run, which is directly related to ***Task Root***. For example: `/task.xqy` or `/mySubPath/task.xqy`
 
 ## Task Root
 
-Specifies the base location were the script declared in //**Task Path**// resides. Additional modules required by the scheduled script will use this field as a base location/root to resolve modules location.
+Specifies the base location were the script declared in ***Task Path*** resides. Additional modules required by the scheduled script will use this field as a base location/root to resolve modules location.
 
 ### Database
-If the task root is located in the database then a root location can be declare as //**/**// while subdirectories can be declared as //**/myPath**//
+If the task root is located in the database then a root location can be declare as ***/*** while subdirectories can be declared as ***/myPath***
 
 ### File System
 
-If the location is on the file system a valid example is: //**c:\trunk\src**//
+If the location is on the file system a valid example is: ***c:\trunk\src***
 
 ### Task Period
 
-Unit of time that //**Task Type**// will use. For example if //**minutely**// is selected then a //**1**// on this field will make MarkLogic run the scheduled task every minute.
+Unit of time that ***Task Type*** will use. For example if ***minutely*** is selected then a ***1*** on this field will make MarkLogic run the scheduled task every minute.
 
 ### Task Database
 
@@ -205,11 +211,11 @@ Database that the scheduled script will work in.
 
 ### Task Modules
 
-Defines whether //**Task Root**// will be interpreted as a location in a database or as a location in the file system.
+Defines whether ***Task Root*** will be interpreted as a location in a database or as a location in the file system.
 
 ### Task User
 
-A scheduled task is often run under the //**admin**// user, which is often written between parenthesis.
+A scheduled task is often run under the ***admin*** user, which is often written between parenthesis.
 
 ### Task Host
 
@@ -223,4 +229,4 @@ Hostname of the host were the task will be executed.
 
 # Reference
 
-  * [[http://www.mail-archive.com/general@developer.marklogic.com/msg01883.html|Xdmp:default-permissions not working?]]
+  * [http://www.mail-archive.com/general@developer.marklogic.com/msg01883.html]
