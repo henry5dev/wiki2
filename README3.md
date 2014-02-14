@@ -39,12 +39,18 @@ A MarkLogic database can be accessed by using a connection to an App Server. The
 
 MarkLogic includes a suite of XQuery script examples installed by default with the following details:
 
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
 
-| Database             | Documents  |
-| –------------------- | –--------- |
-| App Server           | Docs[HTTP] |
-| Application Folder   | `c:\Program Files\MarkLogic\Docs\` |
-| XQuery Scripts       | `c:\Program Files\MarkLogic\Docs\use-cases\`  |
+
+Database | Documents
+--- | ---	
+App Server           | Docs[HTTP] 
+Application Folder   | `c:\Program Files\MarkLogic\Docs\`
+XQuery Scripts       | `c:\Program Files\MarkLogic\Docs\use-cases\`
 
 # MarkLogic Console
 
